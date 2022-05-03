@@ -1,0 +1,44 @@
+﻿@model FireAndIce.Models.Query
+
+@{
+    ViewData["Title"] = "Assign To Query";
+}
+
+<h1>Assign</h1>
+
+<h4>Query</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Assign">
+            <div class="form-group">
+                <label asp-for="TechId" class="control-label"></label>
+                <select asp-for="TechId" class="form-control" asp-items="ViewBag.Techs"></select>
+                <span asp-validation-for="TechId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateVisit" class="control-label"></label>
+                <input asp-for="DateVisit" class="form-control" />
+                <span asp-validation-for="DateVisit" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Title" />
+            <input type="hidden" asp-for="Discription" />
+            <input type="hidden" asp-for="Address" />
+            <input type="hidden" asp-for="Immage" />
+            <input type="hidden" asp-for="Status" />
+            <input type="hidden" asp-for="OwnerId" />
+            <div class="form-group">
+                <input type="submit" value="Assign" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

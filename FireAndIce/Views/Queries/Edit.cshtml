@@ -1,0 +1,92 @@
+﻿@model FireAndIce.Models.Query
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Query</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="OwnerId" />
+            <input type="hidden" asp-for="TechId" />
+            <input type="hidden" asp-for="Immage" />
+            @if (User.IsInRole("Customer"))
+            {
+                <input type="hidden" asp-for="Status" />
+                <input type="hidden" asp-for="DateVisit" />
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Discription" class="control-label"></label>
+                    <input asp-for="Discription" class="form-control" />
+                    <span asp-validation-for="Discription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <p>Upload picture</p>
+                    <input type="file" name="files" />
+                </div>
+            }
+            @if (User.IsInRole("Tech"))
+            {
+                <input type="hidden" asp-for="DateVisit" />
+                <input type="hidden" asp-for="Title" />
+                <input type="hidden" asp-for="Discription" />
+                <input type="hidden" asp-for="Address" />
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<Status>()"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            }
+            @if (User.IsInRole("Administrator"))
+            {
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Discription" class="control-label"></label>
+                    <input asp-for="Discription" class="form-control" />
+                    <span asp-validation-for="Discription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <p>Upload picture</p>
+                    <input type="file" name="files" />
+                </div>
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<Status>()"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            }
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

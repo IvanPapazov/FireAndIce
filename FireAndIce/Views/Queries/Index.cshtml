@@ -1,0 +1,124 @@
+﻿@model IEnumerable<FireAndIce.Models.Query>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    @if (!User.IsInRole("Tech"))
+    {
+        <a asp-action="Create">Create New</a> <b>|</b>
+    }
+    @if (User.IsInRole("Customer")|| User.IsInRole("Administrator"))
+    {
+        <a asp-action="Index" asp-route-status="All">All</a> <b>|</b>
+        <a asp-action="Index" asp-route-status="Waiting">Waiting</a> <b>|</b>
+        <a asp-action="Index" asp-route-status="Completed">Completed</a> <b>|</b>
+        <a asp-action="Index" asp-route-status="ExpectingAVisit">ExpectingAVisit</a> <b>|</b>
+        <a asp-action="Index" asp-route-status="InProgress">InProgress</a>
+    }
+    @if (User.IsInRole("Tech"))
+    {
+        <a asp-action="TodayApplications">Today's applications</a>
+    }
+</p>
+@if (User.IsInRole("Administrator"))
+{
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                <select name="Customer" class="form-control" value="@ViewData["CurrentFilter2"]" asp-items="ViewBag.Customers">Find queries for given customer customer</select>
+            </p>
+        </div>
+        <input type="submit" value="Search" class="btn btn-default" /> |
+        <a asp-action="Index">Back to Full List</a>
+    </form>
+
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                <select name="Tech" class="form-control" value="@ViewData["CurrentFilter3"]" asp-items="ViewBag.Techs">Find queries for given customer tech</select>
+            </p>
+        </div>
+        <input type="submit" value="Search" class="btn btn-default" /> |
+        <a asp-action="Index">Back to Full List</a>
+    </form>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Immage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateVisit)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @if (item.Immage == null)
+                    {
+                        <p>Not completed</p>
+                    }
+                    else
+                    {
+                        <img src="~/images/@item.Immage" alt="Image" width="100" height="100" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @if (item.DateVisit != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.DateVisit)
+                    }
+                    else
+                    {
+                        <p>Not added</p>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> <b>|</b>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> <b>|</b>
+                    @if (User.IsInRole("Administrator") || (User.IsInRole("Customer") && item.Status == Status.Waiting))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> <b>|</b>
+                    }
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a asp-action="Assign" asp-route-id="@item.Id">Assign</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

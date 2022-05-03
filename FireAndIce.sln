@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireAndIce", "FireAndIce\FireAndIce.csproj", "{69A0DE05-8740-4D91-A537-A4140F899ACA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69A0DE05-8740-4D91-A537-A4140F899ACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69A0DE05-8740-4D91-A537-A4140F899ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69A0DE05-8740-4D91-A537-A4140F899ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69A0DE05-8740-4D91-A537-A4140F899ACA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EE39C79C-F3AF-4EB6-953D-73EF7EE02F86}
+	EndGlobalSection
+EndGlobal
